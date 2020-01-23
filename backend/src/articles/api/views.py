@@ -5,9 +5,13 @@ from rest_framework.generics import (
     UpdateAPIView,
     DestroyAPIView
 )
+from rest_framework import viewsets
 from articles.models import Article
 from .serializers import ArticleSerializer
 
+
+"""
+The below is very repetitive. We can accomplish the same functionality using django's viewsets
 
 class ArticleListView(ListAPIView):
     queryset = Article.objects.all()
@@ -32,3 +36,10 @@ class ArticleUpdateView(UpdateAPIView):
 class ArticleDestroyView(DestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+"""
+
+
+# Use viewsets instead
+class ArticleViewSet(viewsets.ModelViewSet):
+    serializer_class = ArticleSerializer
+    queryset = Article.objects.all()
